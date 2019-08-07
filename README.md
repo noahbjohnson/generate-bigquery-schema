@@ -1,5 +1,6 @@
 # generate-bigquery-schema
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftrinity-insight%2Fgenerate-bigquery-schema.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftrinity-insight%2Fgenerate-bigquery-schema?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftrinity-insight%2Fgenerate-bigquery-schema.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftrinity-insight%2Fgenerate-bigquery-schema?ref=badge_shield)
+
 
 Generate a BigQuery schema from an object or array of objects
 
@@ -72,4 +73,6 @@ console.log(gbs.generateSchema(multipleObjects))
 ### Testing (Mocha)
 1. `npm test`
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftrinity-insight%2Fgenerate-bigquery-schema.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftrinity-insight%2Fgenerate-bigquery-schema?ref=badge_large)
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftrinity-insight%2Fgenerate-bigquery-schema.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftrinity-insight%2Fgenerate-bigquery-schema?ref=badge_large)
+
