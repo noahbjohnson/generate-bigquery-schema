@@ -4,7 +4,7 @@ const assert = require('assert')
 describe('just', function () {
   describe('beat', function () {
     it('just beat it', function () {
-      assert(1===1)
+      assert(1 === 1)
     })
   })
 })
