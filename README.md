@@ -10,7 +10,52 @@ This package serves as a wrapper around generate-schema for extensibility and ou
 `npm install @trinity-insight/generate-bigquery-schema`
 
 ## Usage
-Coming Soon
+### Single Object
+```js
+const gbs = require('generate-bigquery-schema')
+
+const singleObject = {
+  stringKey: "string",
+  numberKey: 88,
+  objectKey: {
+    cool: "we can nest things"
+  }
+}
+console.log(gbs.generateSchema(singleObject))
+// { fields:
+//    [ { name: 'stringKey', type: 'STRING', mode: 'NULLABLE' },
+//      { name: 'numberKey', type: 'INTEGER', mode: 'NULLABLE' },
+//      { name: 'objectKey',
+//        type: 'RECORD',
+//        mode: 'NULLABLE',
+//        fields: [Array] } ] }
+```
+### Object Array
+```js
+const multipleObjects = [
+  {
+    foo: 'bar',
+    number: '4'
+  },
+  {
+    foo: 'bar',
+    number: 4
+  }
+]
+
+console.log(gbs.generateSchema(multipleObjects))
+// { fields:
+//    [ { type: 'STRING',
+//        mode: 'NULLABLE',
+//        description: null,
+//        name: 'foo' },
+//      { type: 'INTEGER',
+//        mode: 'NULLABLE',
+//        description: null,
+//        name: 'number' } ] }
+
+
+```
 
 ## Development
 
