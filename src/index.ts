@@ -85,6 +85,9 @@ function frequencyConciliation (frequencies: any): bigquerySchemaField[] {
           entry[key1] = values1[0]
         }
       }
+      if (entry['type'] === 'DATE') {
+        entry['type'] = 'TIMESTAMP'
+      }
     }
     entry['name'] = key
     consensus.push(entry)
