@@ -87,6 +87,8 @@ function frequencyConciliation (frequencies: any): bigquerySchemaField[] {
       }
       if (entry['type'] === 'DATE') {
         entry['type'] = 'TIMESTAMP'
+      } else if (entry['type'] === 'FLOAT') {
+        entry['type'] = 'STRING'
       }
     }
     entry['name'] = key
