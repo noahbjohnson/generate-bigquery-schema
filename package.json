@@ -1,6 +1,6 @@
 {
   "name": "@trinity-insight/generate-bigquery-schema",
-  "version": "0.0.65-beta.0",
+  "version": "0.0.65-beta.2",
   "description": "Smart generation of BigQuery schemas from an object or array of objects",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -44,6 +44,5 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "generate-schema": "^2.6.0"
   }
 }

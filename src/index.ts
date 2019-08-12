@@ -1,4 +1,4 @@
-import { bigquery } from 'generate-schema'
+import { processFields } from './bigquery'
 
 interface bigquerySchemaField {
   name: string
@@ -26,17 +26,16 @@ export function generateSchema (input: object | object[]): tableSchema {
     const conciled = frequencyConciliation(frequencies)
     return { fields: conciled }
   } else if (typeof input === 'object') {
-    return { fields: bigquery(input) }
+    return { fields: processFields(input) }
   } else {
-    return null
-    // throw new TypeError(`Type ${typeof input} is not supported`)
+    throw new TypeError(`Type ${typeof input} is not supported`)
   }
 }
 
 function getListSchema (objArray: object[]): bigquerySchemaField[][] {
   const schemas = []
   objArray.forEach((obj): void => {
-    schemas.push(bigquery(obj))
+    schemas.push(processFields(obj))
   })
   return schemas
 }
@@ -85,8 +84,8 @@ function frequencyConciliation (frequencies: any): bigquerySchemaField[] {
         } else {
           entry[key1] = values1[0]
         }
-        if (values1.length < 10){
-          if (entry['type'] !== 'RECORD'){
+        if (values1.length < 10) {
+          if (entry['type'] !== 'RECORD') {
             entry['type'] = 'STRING'
           }
         }
