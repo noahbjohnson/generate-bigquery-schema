@@ -28,7 +28,8 @@ export function generateSchema (input: object | object[]): tableSchema {
   } else if (typeof input === 'object') {
     return { fields: bigquery(input) }
   } else {
-    throw new TypeError(`Type ${typeof input} is not supported`)
+    return null
+    // throw new TypeError(`Type ${typeof input} is not supported`)
   }
 }
 
