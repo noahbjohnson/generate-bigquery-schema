@@ -15,7 +15,7 @@ function getPropertyType (value): propertyType {
   if (typeof value === 'object') return 'RECORD'
   if (typeof value === 'boolean') return 'BOOLEAN'
   if (typeof value === 'string') {
-    if (!isNaN((new Date(value)).getTime())) return 'TIMESTAMP'
+    if (/^\d{2,4}-\d{2,4}-\d{2,4}/.test(value) || /^\d{2,4}\/\d{2,4}\/\d{2,4}/.test(value) || /^(\d+[/:])+\d+$/.test(value)) return 'TIMESTAMP'
   }
 
   if (!isNaN(value)) {
@@ -46,7 +46,7 @@ export function processFields (data: object): entryType[] {
           name: key,
           type: type,
           mode: mode,
-          fields: processFields(value)
+          fields: processFields((mode === 'REPEATED') ? value[0] : value)
         }
       } else {
         entry = {

@@ -1,5 +1,7 @@
 import { processFields } from './bigquery'
 
+const forceStringKeys = ['zip', 'phone_number']
+
 interface bigquerySchemaField {
   name: string
   type: string
@@ -81,19 +83,16 @@ function frequencyConciliation (frequencies: any): bigquerySchemaField[] {
           } else if (key1 === 'description') {
             entry['description'] = null
           }
+        } else if (forceStringKeys.includes(key1) || forceStringKeys.includes(key)) {
+          entry['type'] = 'STRING'
         } else {
           entry[key1] = values1[0]
         }
         if (values1.length < 10) {
-          if (entry['type'] !== 'RECORD') {
+          if (entry['type'] !== 'RECORD' && entry['mode'] !== 'REPEATED') {
             entry['type'] = 'STRING'
           }
         }
-      }
-      if (entry['type'] === 'DATE') {
-        entry['type'] = 'TIMESTAMP'
-      } else if (entry['type'] === 'FLOAT') {
-        entry['type'] = 'STRING'
       }
     }
     entry['name'] = key
