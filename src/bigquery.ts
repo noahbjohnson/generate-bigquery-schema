@@ -12,7 +12,7 @@ function getPropertyType (value): propertyType {
   }
 
   if (value instanceof Date) return 'TIMESTAMP'
-  if (typeof value === 'object'){
+  if (typeof value === 'object' && !Array.isArray(value)){
     if (Object.keys(value).length > 0){
       return 'RECORD'
     }
