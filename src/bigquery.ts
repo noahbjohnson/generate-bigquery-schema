@@ -12,7 +12,11 @@ function getPropertyType (value): propertyType {
   }
 
   if (value instanceof Date) return 'TIMESTAMP'
-  if (typeof value === 'object') return 'RECORD'
+  if (typeof value === 'object'){
+    if (Object.keys(value).length > 0){
+      return 'RECORD'
+    }
+  }
   if (typeof value === 'boolean') return 'BOOLEAN'
   if (typeof value === 'string') {
     if (/^\d{2,4}-\d{2,4}-\d{2,4}/.test(value) || /^\d{2,4}\/\d{2,4}\/\d{2,4}/.test(value) || /^(\d+[/:])+\d+$/.test(value)) return 'TIMESTAMP'
