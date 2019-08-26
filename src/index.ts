@@ -1,4 +1,6 @@
-import { bigquery } from 'generate-schema'
+import { processFields } from './bigquery'
+
+const forceStringKeys = ['zip', 'phone_number']
 
 interface bigquerySchemaField {
   name: string
@@ -26,7 +28,7 @@ export function generateSchema (input: object | object[]): tableSchema {
     const conciled = frequencyConciliation(frequencies)
     return { fields: conciled }
   } else if (typeof input === 'object') {
-    return { fields: bigquery(input) }
+    return { fields: processFields(input) }
   } else {
     throw new TypeError(`Type ${typeof input} is not supported`)
   }
@@ -35,7 +37,7 @@ export function generateSchema (input: object | object[]): tableSchema {
 function getListSchema (objArray: object[]): bigquerySchemaField[][] {
   const schemas = []
   objArray.forEach((obj): void => {
-    schemas.push(bigquery(obj))
+    schemas.push(processFields(obj))
   })
   return schemas
 }
@@ -81,19 +83,16 @@ function frequencyConciliation (frequencies: any): bigquerySchemaField[] {
           } else if (key1 === 'description') {
             entry['description'] = null
           }
+        } else if (forceStringKeys.includes(key1) || forceStringKeys.includes(key)) {
+          entry['type'] = 'STRING'
         } else {
           entry[key1] = values1[0]
         }
-        if (values1.length < 10){
-          if (entry['type'] !== 'RECORD'){
+        if (values1.length < 10) {
+          if (entry['type'] !== 'RECORD' && entry['mode'] !== 'REPEATED') {
             entry['type'] = 'STRING'
           }
         }
-      }
-      if (entry['type'] === 'DATE') {
-        entry['type'] = 'TIMESTAMP'
-      } else if (entry['type'] === 'FLOAT') {
-        entry['type'] = 'STRING'
       }
     }
     entry['name'] = key
