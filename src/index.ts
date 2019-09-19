@@ -1,6 +1,6 @@
 import { processFields } from './bigquery'
 
-const forceStringKeys = ['zip', 'phone_number']
+const forceStringKeys = ['zip', 'phone_number', 'agent_phone', 'address2', 'address1']
 
 interface bigquerySchemaField {
   name: string
