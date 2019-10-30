@@ -25,7 +25,9 @@ export function generateSchema (input: object | object[]): tableSchema {
   if (Array.isArray(input)) {
     const listSchemas = getListSchema(input)
     const frequencies = listSchemaFreq(listSchemas)
+    // require('fs').writeFileSync('frequencies.json', JSON.stringify(frequencies))
     const conciled = frequencyConciliation(frequencies)
+    // require('fs').writeFileSync('schema.json', JSON.stringify({fields: conciled}))
     return { fields: conciled }
   } else if (typeof input === 'object') {
     return { fields: processFields(input) }
@@ -103,3 +105,5 @@ function frequencyConciliation (frequencies: any): bigquerySchemaField[] {
   }
   return consensus
 }
+
+// generateSchema(JSON.parse(require('fs').readFileSync('infile.json').toString()).data)
