@@ -96,6 +96,9 @@ function frequencyConciliation (frequencies: any): bigquerySchemaField[] {
       }
     }
     entry['name'] = key
+    if (entry['fields'] && entry['type'] === 'STRING') {
+      delete entry['fields']
+    }
     consensus.push(entry)
   }
   return consensus
